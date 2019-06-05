@@ -2,7 +2,11 @@
     <div id="calendar-entry">
         <div class="calendar-entry-note">
             <input type="text" placeholder="New Event" v-model="inputEntry" required/>
+
             <p class="calendar-entry-day">Day of event: <span class="bold">{{ activeDayTitle }}</span></p>
+
+            <p v-if="error" :style="errorStyle">You must type somthing first!</p>
+
             <button class="button is-primary is-small is-outlined" @click="submitEvent">Submit</button>
         </div>
     </div>
@@ -16,7 +20,9 @@
 
         data() {
             return {
-                inputEntry: ''
+                inputEntry: '',
+                errorStyle: 'color: tomato; font-size: 13px;margin-bottom: 10px;',
+                error: false,
             }
         },
 
@@ -28,9 +34,9 @@
 
         methods: {
             submitEvent() {
-                if(!this.inputEntry)
-                    return;
+                if(!this.inputEntry) return this.error = true;
 
+                this.error = false;
                 store.submitEvent(this.inputEntry);
                 this.inputEntry = '';
             }

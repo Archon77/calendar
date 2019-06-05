@@ -1,9 +1,10 @@
 <template>
     <div id="calendar-week" class="container">
         <div class="columns is-mobile">
-            <CalendarDay v-for="day in state.days"
-                         :key="day.id"
-                         :day="day"
+            <CalendarDay
+                    v-for="day in state.days"
+                    :key="day.id"
+                    :day="day"
             />
         </div>
     </div>
